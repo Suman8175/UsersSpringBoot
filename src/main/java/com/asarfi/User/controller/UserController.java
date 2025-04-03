@@ -5,6 +5,9 @@ import com.asarfi.User.dto.CustomResponse;
 import com.asarfi.User.dto.create.CreateUser;
 import com.asarfi.User.dto.response.UserResponse;
 import com.asarfi.User.service.interfaces.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/asarfi/v1")
 @RequiredArgsConstructor
-
+@Tag(name = "UserController",description = "This controller helps all user related controller")
 public class UserController {
 
     private final UserService userService;
@@ -24,6 +27,15 @@ public class UserController {
         UserResponse user = userService.createUser(createUser);
         return new ResponseEntity<>(user,HttpStatus.CREATED);
     }
+
+
+    @Operation(
+            description = "It gives list of all users present",
+            summary = "This is summary for user controller",
+            responses = {
+                    @ApiResponse(description = "Success",responseCode = "200")
+            }
+    )
 
     @GetMapping("/users")
     public ResponseEntity<?> getAllUsers(){

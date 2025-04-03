@@ -10,4 +10,3 @@ CREATE TABLE user_table (
 );
 
 
-
